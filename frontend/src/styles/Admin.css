@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+.admin-container{
+
+    min-height:100vh;
+
+    padding:40px;
+
+    background:
+        radial-gradient(circle at top left,#60a5fa 0%,transparent 35%),
+        linear-gradient(135deg,#07162f,#0f172a,#162d68);
+
+}
+
+.header{
+
+    text-align:center;
+
+    color:white;
+
+    margin-bottom:40px;
+
+}
+
+.header h1{
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+}
+
+.header p{
+
+    color:#dbeafe;
+
+    font-size:17px;
+
+}
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.stat-card h3{
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.stat-card h2{
+
+    font-size:40px;
+
+    color:#0f172a;
+
+}
+
+.pending{
+
+    border-left:8px solid #f59e0b;
+
+}
+
+.resolved{
+
+    border-left:8px solid #22c55e;
+
+}
+
+.rejected{
+
+    border-left:8px solid #ef4444;
+
+}
+
+.table-card{
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    margin-bottom:35px;
+
+    overflow-x:auto;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+}
+
+.table-card h2{
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:700px;
+
+}
+
+th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:16px;
+
+}
+
+td{
+
+    padding:15px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    text-align:center;
+
+}
+
+tr:hover{
+
+    background:#eff6ff;
+
+}
+
+@media(max-width:768px){
+
+.admin-container{
+
+    padding:20px;
+
+}
+
+.header h1{
+
+    font-size:32px;
+
+}
+
+.stat-card h2{
+
+    font-size:32px;
+
+}
+
+}
