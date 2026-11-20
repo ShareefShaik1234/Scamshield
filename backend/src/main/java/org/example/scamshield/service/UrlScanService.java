@@ -29,6 +29,7 @@ public class UrlScanService {
 
     @Autowired
     private RiskCalculator calculator;
+
     @Autowired
     private VirusTotalService virusTotalService;
 
@@ -39,28 +40,27 @@ public class UrlScanService {
             logger.warn("Invalid URL received: {}", request.getUrl());
             return new UrlResponse(100, "INVALID", "Invalid URL format");
         }
-        VirusTotalResult vtResult;
-
-        try {
-            vtResult = virusTotalService.checkUrl(request.getUrl());
-
-            logger.info("VirusTotal Status : {}", vtResult.getStatus());
-            logger.info("Malicious : {}", vtResult.getMalicious());
-            logger.info("Suspicious : {}", vtResult.getSuspicious());
-            logger.info("Harmless : {}", vtResult.getHarmless());
-
-        } catch (Exception e) {
-            throw new RuntimeException("VirusTotal scan failed", e);
-        }
 
         int score = calculator.calculateRisk(request.getUrl());
         String status = calculator.getStatus(score);
         String reason = calculator.getReason(request.getUrl());
 
-        if (vtResult.getMalicious() > 0) {
-            score = 100;
-            status = "DANGEROUS";
-            reason = "VirusTotal detected malicious URL";
+        try {
+            VirusTotalResult vtResult = virusTotalService.checkUrl(request.getUrl());
+            if (vtResult != null) {
+                logger.info("VirusTotal Status : {}", vtResult.getStatus());
+                logger.info("Malicious : {}", vtResult.getMalicious());
+                logger.info("Suspicious : {}", vtResult.getSuspicious());
+                logger.info("Harmless : {}", vtResult.getHarmless());
+
+                if (vtResult.getMalicious() > 0) {
+                    score = 100;
+                    status = "DANGEROUS";
+                    reason = "VirusTotal detected malicious URL";
+                }
+            }
+        } catch (Exception e) {
+            logger.error("VirusTotal scan failed, using local risk analysis: {}", e.getMessage(), e);
         }
 
         UrlScan scan = new UrlScan();
