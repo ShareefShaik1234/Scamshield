@@ -25,6 +25,7 @@ The application also provides scan history, community reports, analytics, and an
 - REST APIs
 - MySQL
 - Google Gemini AI
+- VirusTotalAPI
 - Maven
 
 ## Main Features
